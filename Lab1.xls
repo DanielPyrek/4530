@@ -1,10 +1,4 @@
-Dark voltage	-1.308624 
-Blank voltage	3.480434 
-Slope	213.231920 
-Intercept	-39.541817 
-R-squared	0.723437 
-
-Concentration (volts)	Voltage
+Concentration	(ml/L) Voltage (volts)
 0.000000	3.498714
 1.000000	2.844672
 2.000000	1.359220
