@@ -5,7 +5,7 @@
   import pandas as pd
   from scipy import stats
   #The data file path is the raw data url on github. Happily python can read directly from a web page.
-  data_file_path = "https://raw.githubusercontent.com/DanielPyrek/4530/master/Lab3_1"
+  data_file_path = "https://raw.githubusercontent.com/DanielPyrek/4530/master/Lab3.1"
   from aguaclara.core.units import unit_registry as u
   u.define('equivalent = mole = eq')
   import aguaclara.research.environmental_processes_analysis as epa
@@ -19,7 +19,6 @@
   # input of the ANC_zeroed function and the range on that is set by the next
   # two inputs in the optimize.brentq function. The ANC is passed as an
   # additional argument.
-
   def pH_open(ANC):
    return optimize.brentq(ANC_zeroed, 0, 14,args=(ANC))
 
@@ -42,6 +41,7 @@
   V = 4.17*u.L
   Q = 0.005833*u.L/u.second
   theta = V/Q
+  theta
   x = x/theta*u.dimensionless
   #The iloc method is simple and efficient, so I'll use that to get the y values.
   y = df.iloc[:,1].values
@@ -115,7 +115,7 @@ plt.show()
 
 
 
-data_file_path2 = "https://raw.githubusercontent.com/DanielPyrek/4530/master/Lab3_2"
+data_file_path2 = "https://raw.githubusercontent.com/DanielPyrek/4530/master/Lab3.2"
 #Now we create a pandas dataframe with the data in the file
 df = pd.read_csv(data_file_path2,delimiter='\t')
 print(df)
