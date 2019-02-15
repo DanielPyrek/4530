@@ -104,11 +104,12 @@ y4 = epa.ANC_open(y)
 fig, ax = plt.subplots()
 ax.plot(x, y3, 'blue' ,)
 ax.plot(x, y4, 'green', )
+ax.plot(x, y2, 'red', )
 
 # Add axis labels using the column labels from the dataframe
 ax.set(xlabel="Residence Time (dimensionless)")
 ax.set(ylabel="ANC (eq/L)")
-ax.legend(['Closed ANC', 'Open ANC'])
+ax.legend(['Closed ANC', 'Open ANC', 'Conservative ANC'])
 ax.grid(True)
 plt.savefig('C:/Users/dapmo/github/4530/Lab3Plot3')
 plt.show()
@@ -164,22 +165,26 @@ Jessie Powell
   ![plot](https://github.com/DanielPyrek/4530/blob/master/Lab3Plot1.png?raw=true)
       Figure 1: Lake pH vs Hydraulic Residence Time
 
-2.
-  ![plot](https://github.com/DanielPyrek/4530/blob/master/Lab3Plot2.png?raw=true)
-          Figure 2: Expected ANC vs Hydraulic Residence Time
+
+2,3,4.
+  ![plot](https://github.com/DanielPyrek/4530/blob/master/Lab3Plot3.png?raw=true)
+              Figure 2: Closed and Open ANC vs Hydraulic Residence Time
 
 $$ANC_{out} \; =\; ANC_{in} \; \cdot \; \left(1\; -\; {\mathop{e}\nolimits^{-t/\theta \; \; }} \right)+\; ANC_{0} \; \cdot \; {\mathop{e}\nolimits^{-t/\theta \; }}$$
-
-3&4.
-  ![plot](https://github.com/DanielPyrek/4530/blob/master/Lab3Plot3.png?raw=true)
-              Figure 3: Closed and Open ANC vs Hydraulic Residence Time
 
   We used the environmental_processes_analysis functions to solve for #3 and #4. Specifically the epa.ANC_closed and epa.ANC_open
 
 
 5.
   ![plot](https://github.com/DanielPyrek/4530/blob/master/Lab3Plot4.png?raw=true)
-                  Figure 4: Lake pH vs Hydraulic Residence Time for Calcium Carbonate
+                  Figure 3: Lake pH vs Hydraulic Residence Time for Calcium Carbonate
 
 
 The pH dropped a lot faster for the calcium carbonate versus when we used sodium carbonate. This indicates that the calcium carbonate has a lower ANC than the sodium carbonate. Therefore the acid rain was able to neutralize it quicker and drop the pH faster.
+
+Questions:
+1. Because sodium bicarbonate has a density of 2.2 g/cm^3, as it is added to the lake without the use of a stirrer, it will sink. While some of it will dissolve as it moves downward, that water will increase in density and sink as well. At the end of this, the pH near the top of the lake will be much lower than at the bottom, causing the top to be acidic. 
+
+2. The calcium carbonate did not dissolve as it was stirred in, which led to a steady drop in pH as acid was pumped into the lake. Instead, it sunk to the bottom corners of the lake. This is a significant complication, because since CaCO3 is less soluble, more dense, and cannot contribute ANC, it is ineffective.
+
+Our computer experienced technical difficulties with ProCoda so we cannot completely trust the accuracy of the data colected.
