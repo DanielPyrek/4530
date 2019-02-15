@@ -5,7 +5,7 @@
   import pandas as pd
   from scipy import stats
   #The data file path is the raw data url on github. Happily python can read directly from a web page.
-  data_file_path = "https://raw.githubusercontent.com/DanielPyrek/4530/master/Lab2_1"
+  data_file_path = "https://raw.githubusercontent.com/DanielPyrek/4530/master/Lab3_1"
   from aguaclara.core.units import unit_registry as u
   u.define('equivalent = mole = eq')
   import aguaclara.research.environmental_processes_analysis as epa
@@ -115,7 +115,7 @@ plt.show()
 
 
 
-data_file_path2 = "https://raw.githubusercontent.com/DanielPyrek/4530/master/Lab2_2"
+data_file_path2 = "https://raw.githubusercontent.com/DanielPyrek/4530/master/Lab3_2"
 #Now we create a pandas dataframe with the data in the file
 df = pd.read_csv(data_file_path2,delimiter='\t')
 print(df)
@@ -138,9 +138,48 @@ theta = V/Q
 xc = xc/theta*u.dimensionless
 #The iloc method is simple and efficient, so I'll use that to get the y values.
 yc = df.iloc[:,1].values
+
+fig, ax = plt.subplots()
+# plot the data as red circles
+ax.plot(xc, yc, 'ro', )
+
+
+# Add axis labels using the column labels from the dataframe
+ax.set(xlabel="Residence Time (dimensionless)")
+ax.set(ylabel=list(df)[1])
+ax.legend(['Measured', 'Linear regression'])
+ax.grid(True)
+# Here I save the file to my local harddrive. You will need to change this to work on your computer.
+# We don't need the file type (png) here.
+
+plt.savefig('C:/Users/dapmo/github/4530/Lab3Plot4')
+plt.show()
+
   ```
+Lab 3 Part 1
+Daniel Pyrek
+Jessie Powell
 
-  ![plot](https://github.com/DanielPyrek/4530/blob/master/TutorialPlot.png?raw=true)
-      Figure 1: Plant Height v.s Time
+1.
+  ![plot](https://github.com/DanielPyrek/4530/blob/master/Lab3Plot1.png?raw=true)
+      Figure 1: Lake pH vs Hydraulic Residence Time
 
-  $$ y = 1.794 \times x-3.667  \frac{mg}{L}$$  
+2.
+  ![plot](https://github.com/DanielPyrek/4530/blob/master/Lab3Plot2.png?raw=true)
+          Figure 2: Expected ANC vs Hydraulic Residence Time
+
+$$ANC_{out} \; =\; ANC_{in} \; \cdot \; \left(1\; -\; {\mathop{e}\nolimits^{-t/\theta \; \; }} \right)+\; ANC_{0} \; \cdot \; {\mathop{e}\nolimits^{-t/\theta \; }}$$
+
+3&4.
+  ![plot](https://github.com/DanielPyrek/4530/blob/master/Lab3Plot3.png?raw=true)
+              Figure 3: Closed and Open ANC vs Hydraulic Residence Time
+
+  We used the environmental_processes_analysis functions to solve for #3 and #4. Specifically the epa.ANC_closed and epa.ANC_open
+
+
+5.
+  ![plot](https://github.com/DanielPyrek/4530/blob/master/Lab3Plot4.png?raw=true)
+                  Figure 4: Lake pH vs Hydraulic Residence Time for Calcium Carbonate
+
+
+The pH dropped a lot faster for the calcium carbonate versus when we used sodium carbonate. This indicates that the calcium carbonate has a lower ANC than the sodium carbonate. Therefore the acid rain was able to neutralize it quicker and drop the pH faster.
