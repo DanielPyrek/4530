@@ -1,0 +1,111 @@
+```python
+  from aguaclara.core.units import unit_registry as u
+  import numpy as np
+  import matplotlib.pyplot as plt
+  import pandas as pd
+  from scipy import stats
+  #The data file path is the raw data url on github. Happily python can read directly from a web page.
+  data_file_path = "https://raw.githubusercontent.com/DanielPyrek/4530/master/Lab1.xls"
+
+  #Now we create a pandas dataframe with the data in the file
+  df = pd.read_csv(data_file_path,delimiter='\t')
+  #if you want to see what is in the dataframe you can print it!
+  print(df)
+  # The column headers can be access by using the list command
+  list(df)
+  columns = df.columns
+  print(columns)
+  #Below are three equally fine methods of extracting a column of data from the pandas dataframe.
+
+  # 1) We can select a column by using the column header. Here we use the column header by selecting one array element from the list command.
+  x = df[list(df)[0]].values * u.mg/u.L
+  x
+  # 2) We can use the loc command to select all of the rows (: command) and the column with the label given by list(df)[0].
+  x = df.loc[:, list(df)[0]].values * u.mg/u.L
+  x
+  # 3) We can use the iloc command and select all of the rows in column 0.
+  x = df.iloc[:,0].values * u.mg/u.L
+  x
+  #The iloc method is simple and efficient, so I'll use that to get the y values.
+  y = df.iloc[:,1].values * u.mg/u.L
+
+  # We will use the stats package to do the linear regression.
+  # It is important to note that the units are stripped from the x and y arrays when processed by the stats package.
+  slope, intercept, r_value, p_value, std_err = stats.linregress(x,y)
+
+  #We can add the units to intercept by giving it the same units as the y values.
+  intercept = intercept * y.units
+  # Note that slope is dimensionless for this case, but not in general!
+  # For the general case we can attach the correct units to slope.
+  slope = slope * y.units/x.units
+  print(slope)
+  print(intercept)
+  # Now create a figure and plot the data and the line from the linear regression.
+  fig, ax = plt.subplots()
+  # plot the data as red circles
+  ax.plot(x, y, 'ro', )
+
+  #plot the linear regression as a black line
+  ax.plot(x, slope * x + intercept, 'k-', )
+
+  # Add axis labels using the column labels from the dataframe
+  ax.set(xlabel=list(df)[0])
+  ax.set(ylabel=list(df)[1])
+  ax.legend(['Measured', 'Linear regression'])
+  ax.grid(True)
+  # Here I save the file to my local harddrive. You will need to change this to work on your computer.
+  # We don't need the file type (png) here.
+  z = df.iloc[0:7,0].values * u.mg/u.L
+  a = df.iloc[0:7,1].values * u.mg/u.L
+
+  slope, intercept, r_value, p_value, std_err = stats.linregress(z,a)
+
+  #We can add the units to intercept by giving it the same units as the y values.
+  intercept = intercept * a.units
+  # Note that slope is dimensionless for this case, but not in general!
+  # For the general case we can attach the correct units to slope.
+  slope = slope * a.units/z.units
+  print(slope)
+  print(intercept)
+  # Now create a figure and plot the data and the line from the linear regression.
+  fig, ax = plt.subplots()
+  # plot the data as red circles
+  ax.plot(z, a, 'ro', )
+
+  #plot the linear regression as a black line
+  ax.plot(z, slope * z + intercept, 'k-', )
+
+  # Add axis labels using the column labels from the dataframe
+  ax.set(xlabel=list(df)[0])
+  ax.set(ylabel=list(df)[1])
+  ax.legend(['Measured', 'Linear regression'])
+  ax.grid(True)
+
+  plt.savefig('C:/Users/dapmo/github/4530/Lab1_2.jpeg')
+  plt.show()
+
+  ```
+  Lab 2
+
+  Daniel Daniel
+  Jessie Powell
+
+  ![plot](https://github.com/DanielPyrek/4530/blob/master/Lab1.png?raw=true)
+
+  Figure 1: Dye Concentration v.s Absorbance
+
+  The graph looks like a logarithmic fit would work much better than a linear one.
+
+
+  ![plot](https://github.com/DanielPyrek/4530/blob/master/Lab1_2.jpeg?raw=true)
+
+  Figure 2: Dye Concentration v.s Absorbance without 100 or 200 mg/L
+
+  The linear line regression fits a little better but it still looks logarithmic.
+
+  3) The extinction coefficient is -0.00005705383793 for 0 mg/L 6.185721297 for	1 mg/L 12.70448329 for 2 mg/L 6.317025438	for 5 mg/L 3.955210941 for	10 mg/L 2.265282517	for 20 mg/L 1.135742698	for 50 mg/L 0.5795191679	for 100 mg/L 0.4300693297	for 200 mg/L
+  4) We did not have time to solve for the unknown concentration (told okay by TA).
+  5) We used a pipette, volumetric flask, and scale. Thee least accurate of these is the pipette. Therefore the pipette measurements control the accuracy of the NaCl density measurement.
+  6) From prelab - 1.0408 kg/L
+  7) Since the pipette controls the accuracy of the density measurement. The accuracy was 0.6% from the 1st lecture slides.
+  8) Though the experiment, it was concluded that as the concentration of the dye increases, the voltage decreases. And using said voltage values, we were able to calculate the absorption, which showed an increase. While we were able to get readable marks eventually, it was difficult to consistently get good readings. This was due to toubles with the spectrophotometer. Every so often the inside of the spectrophotometer would fill with air bubbles, changing the accuracy of the readings. Additionally, it seemed that the orientation with respect to nearby light sources also played a role in our readings. Overall, however, our data does show an unward trend when graphing concentration and absorbance.
