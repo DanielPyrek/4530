@@ -72,10 +72,10 @@
 
 Mass=623*u.mg
 ANC0=Mass/V/(84*u.mg)/(1000)*u.equivalent
-ANCIN = 0*u.eq/u.L
+ANCIN = -0.000631*u.eq/u.L
 
 y2 = y
-y2 = ANC0*2.71828**(-x).to(u.dimensionless).magnitude
+y2 = ANCIN*(1-(2.71828**(-x).to(u.dimensionless).magnitude))+ANC0*2.71828**(-x).to(u.dimensionless).magnitude
 
 fig, ax = plt.subplots()
 # plot the data as red circles
@@ -183,7 +183,7 @@ $$ANC_{out} \; =\; ANC_{in} \; \cdot \; \left(1\; -\; {\mathop{e}\nolimits^{-t/\
 The pH dropped a lot faster for the calcium carbonate versus when we used sodium carbonate. This indicates that the calcium carbonate has a lower ANC than the sodium carbonate. Therefore the acid rain was able to neutralize it quicker and drop the pH faster.
 
 Questions:
-1. Because sodium bicarbonate has a density of 2.2 g/cm^3, as it is added to the lake without the use of a stirrer, it will sink. While some of it will dissolve as it moves downward, that water will increase in density and sink as well. At the end of this, the pH near the top of the lake will be much lower than at the bottom, causing the top to be acidic. 
+1. Because sodium bicarbonate has a density of 2.2 g/cm^3, as it is added to the lake without the use of a stirrer, it will sink. While some of it will dissolve as it moves downward, that water will increase in density and sink as well. At the end of this, the pH near the top of the lake will be much lower than at the bottom, causing the top to be acidic.
 
 2. The calcium carbonate did not dissolve as it was stirred in, which led to a steady drop in pH as acid was pumped into the lake. Instead, it sunk to the bottom corners of the lake. This is a significant complication, because since CaCO3 is less soluble, more dense, and cannot contribute ANC, it is ineffective.
 
