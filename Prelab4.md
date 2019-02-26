@@ -11,42 +11,30 @@
   from scipy import optimize
 
 
-
-  def ANC_zeroed(pHguess, ANC):
-   return ((epa.ANC_open(pHguess) - ANC).to(u.mol/u.L)).magnitude
-
-  # Now we use root finding to find the pH that results in the known ANC.
-  # Our function will call the ANC_zeroed function. The pHguess is the first
-  # input of the ANC_zeroed function and the range on that is set by the next
-  # two inputs in the optimize.brentq function. The ANC is passed as an
-  # additional argument.
-
-  def pH_open(ANC):
-   return optimize.brentq(ANC_zeroed, 0, 14,args=(ANC))
-
-  # We can test this function to find the pH of pure water in equilibrium
-  # with the atmosphere
-  print('The pH of pure water equilibrium with the atmosphere is',.2*3.5+.8*pH_open(1.6*u.meq/u.L))
-  phc=.2*3.5+.8*pH_open(1.6*u.meq/u.L)
-
-
-  print('The pH of pure water equilibrium with the atmosphere is',.2*3.5+.8*pH_open(70*u.ueq/u.L))
-  phw=.2*3.5+.8*pH_open(70*u.ueq/u.L)
-
-ANC2=10**(-3.2)*u.eq/u.L
-print(ANC2)
   ```
-Prelab 3
+Prelab 4
 Daniel Pyrek
 Jessie Powell
 
-1 - The pH of cayuga lake is 7.5447 and the ph of wolf pond is 6.4709.
-
-2 - The pH is low enough that we can neglect all concentrations except H+ in the ANC equation. The ANC of a sample of pH 3.2 is:
-
-$$ 10^{\neg3.2}= 0.000631 eq/L$$
-
-3 - Hydrogen ions are generally not conserved because they can react with things in the water like bicarbonate.
+#1
+$$\frac{{mole\; O}_{{2}} }{{32000\; mg\; O}_{{2}} } \cdot \frac{{2\; mole\; Na}_{{2}} {SO}_{{3}} }{{mole\; O}_{{2}} } \cdot \frac{{126,000\; mg\; Na}_{{2}} {SO}_{{3}} }{{mole\; Na}_{{2}} {SO}_{{3}} } =\frac{{\; 7.875\; mg\; Na}_{{2}} {SO}_{{3}} }{{mg\; O}_{{2}} }$$
 
 
-  $$ y = 1.794 \times x-3.667  \frac{mg}{L}$$  
+$$.75L \cdot 10 \frac{mg}{L} \;O_{{2}} = 7.5 mg \:O_{{2}}$$
+
+$$\frac{{\; 7.875\; mg\; Na}_{{2}} {SO}_{{3}} }{{mg\; O}_{{2}}} \cdot 7.5 mg \:O_{{2}} = 59.0625 mg \:Na_{{2}} {SO}_{{3}}  $$
+
+#2
+The graph would start a concentration of zero oxygen. Then it would quickly increase and then level off. Therefore it would look logarithmic.
+
+#3
+Even when there is no oxygen pumping into the lake, oxygen can still diffuse into the water via the surface in contact with the atmosphere.
+
+#4
+The volumetric gas transfer coefficient will start out high as oxygen levels are zero, and then logarithmicly decrease to zero. It would theoretically take an infinite k value to keep the lake at saturation levels.
+
+#5
+
+$$4e^{-} + 4H^{+} + O_{2} \rightarrow 2H_{2}O $$
+
+The DO probe is conducting the reaction above. Therefore, eventually all oxygen will be reduced into water, and there will be no oxygen left.
