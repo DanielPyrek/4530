@@ -1,6 +1,6 @@
 ```python
 
-#DANEILEFA ANDS JESSICASPPWD
+#DanielPyrek and JessiePowell
 
 
 from aguaclara.core.units import unit_registry as u
@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from scipy import stats
+import numpy
 
 data_file_path = "https://raw.githubusercontent.com/DanielPyrek/4530/master/GranTime0_1"
 data_file_path2 = "https://raw.githubusercontent.com/DanielPyrek/4530/master/GranTime0_2"
@@ -20,7 +21,9 @@ from scipy import optimize
 def ANC_zeroed(pHguess, ANC):
  return ((epa.ANC_open(pHguess) - ANC).to(u.mol/u.L)).magnitude
 
+#Question1
 
+#Import data for titration curve
 df = pd.read_csv(data_file_path,delimiter='\t')
 df2 = pd.read_csv(data_file_path2,delimiter='\t')
 df3 = pd.read_csv(data_file_path3,delimiter='\t')
@@ -35,7 +38,7 @@ x
 x = df.iloc[:,0].values * u.ml
 x
 y = df.iloc[:,1].values * u.pH
-
+y
 
 print(df2)
 list(df2)
@@ -48,23 +51,26 @@ x2
 x2= df2.iloc[:,0].values * u.ml
 x2
 y2 = df2.iloc[:,1].values * u.pH
+y2
+df = pd.read_csv(data_file_path2,delimiter='\t')
+x8 = df[list(df)[0]].values * u.ml
+x8
+x8 = df.loc[:, list(df)[0]].values * u.ml
 
+x10=[1.75,2]*u.ml
+y10=[5.17327,3.98137]*u.pH
+
+x10
+y10
+  # Plot
 fig, ax = plt.subplots()
- # plot the data as red circles
-ax.plot(x2, y2, 'bo', )
-ax.plot(x, y, 'ro', )
-
-
-
-
-# Add axis labels using the column labels from the dataframe
+ax.plot(x2, y2, 'blue', )
+ax.plot(x, y, 'red', )
+ax.plot(x10, y10, 'purple', )
 ax.set(xlabel=list(df)[0])
 ax.set(ylabel=list(df)[1])
-ax.legend(['ANC = [HC03^-1] + 2[CO3^-2] + [OH-] - [H+] ', 'ANC = [HC03^-1] + [OH-] - [H+] '])
+ax.legend(['ANC = [HC03^-1] + [OH-] - [H+] ','ANC = [HC03^-1] + 2[CO3^-2] + [OH-] - [H+] ','Steep Slope'])
 ax.grid(True)
-# Here I save the file to my local harddrive. You will need to change this to work on your computer.
-# We don't need the file type (png) here.
-
 plt.savefig('C:/Users/dapmo/github/4530/Time0GranPlot')
 plt.show()
 
@@ -89,36 +95,32 @@ x4= df3.iloc[8:11,0].values * u.ml
 x4
 y4 = df3.iloc[8:11,1].values * u.dimensionless
 
-slope, intercept, r_value, p_value, std_err = stats.linregress(x4,y4)
 
-#We can add the units to intercept by giving it the same units as the y values.
+#Linear regression
+slope, intercept, r_value, p_value, std_err = stats.linregress(x4,y4)
 intercept = intercept * y3.units
-# Note that slope is dimensionless for this case, but not in general!
-# For the general case we can attach the correct units to slope.
 slope = slope * y3.units/x3.units
 print(slope)
 print(intercept)
 
-
+#Plot
 fig, ax = plt.subplots()
- # plot the data as red circles
 ax.plot(x3, y3, 'ro', )
 ax.plot(x4, slope * x4 + intercept, 'k-', )
-
-# Add axis labels using the column labels from the dataframe
 ax.set(xlabel=list(df3)[0])
 ax.set(ylabel=list(df3)[1])
 ax.legend(['Titrant volume', 'Linear regression'])
 ax.grid(True)
-# Here I save the file to my local harddrive. You will need to change this to work on your computer.
-# We don't need the file type (png) here.
-
 plt.savefig('C:/Users/dapmo/github/4530/Time0GranPlotF1')
 plt.show()
 
+#Solve for Ve
 xintercept=(-intercept)/slope
 xintercept
 
+
+
+#Question3
 
 #Import lab ANC data
 data_file_path5 = "https://raw.githubusercontent.com/DanielPyrek/4530/master/ANCValues"
@@ -179,7 +181,6 @@ x = x/theta*u.dimensionless
 y = df.iloc[:,1].values
 
 
-#Question 2
 
 Mass=623*u.mg
 ANC0=Mass/V/(84*u.mg)/(1000)*u.equivalent
@@ -197,8 +198,6 @@ ax.grid(True)
 # Here I save the file to my local harddrive. You will need to change this to work on your computer.
 # We don't need the file type (png) here.
 
-plt.savefig('C:/Users/dapmo/github/4530/Lab3Plot2')
-plt.show()
 
 
 
@@ -206,20 +205,57 @@ Carb = .0017786
 y3 = epa.ANC_closed(y,Carb*u.mol/u.L)
 y4 = epa.ANC_open(y)
 
+
+#Plot
 fig, ax = plt.subplots()
 ax.plot(xtime, y3, 'blue' ,)
 ax.plot(xtime, y4, 'green', )
 ax.plot(xtime, y2, 'red', )
 ax.plot(x5, y5, 'orange', )
 
-# Add axis labels using the column labels from the dataframe
 ax.set(xlabel="Residence Time (dimensionless)")
 ax.set(ylabel="ANC (eq/L)")
 ax.legend(['Closed ANC', 'Open ANC', 'Conservative ANC','Empirical ANC Data'])
 ax.grid(True)
-plt.savefig('C:/Users/dapmo/github/4530/Lab3Plot3')
+plt.savefig('C:/Users/dapmo/github/4530/Lab4ANCPlot')
 plt.show()
 
 
 
+
 ```
+<b>Acid Neutrality Post Lab3
+Daniel Pyrek and Jessie Powell
+3/2/19</b>
+
+
+<b>Introduction and Objectives</b>
+	The goal of this lab is to determine ANC of all the samples recovered from the previous lab, Acid Lake Remediation Lab. From that, five 50mL samples from the “lake” were recovered, each taken at five minute time intervals with increasing amounts of the acid NaOH, which has a pH of 3.2. To find the ANC, hydrochloric acid was added incrementally and recording data on a Gran plot. From the plots, it is possible to determine the exact volume of titrant needed and from there, the ANC, which is a function of said volume:
+
+$$ANC=\frac{V_e N_t }{V_s }$$
+
+
+
+<b>Procedures</b>
+	To begin, the pH probe was calibrated using pH 4,7 and 10 buffers. Once calibrated, the ANC of 50 mL of reverse osmosis water was measured to verify that the Gran technique works accurately. To test this, the beaker was placed on the stirrer with stir bar. Then the initial pH was measured, followed by the first 0.25 mL addition of hydrochloric acid. The pH was recorded after each titrant addition. This procedure was repeated with all five samples.
+
+<b>Results</b>
+
+Our first task was to plot a titration curve from the data we collected. We plotted pH as a function of titrant volume. This is important because we can moniter what reactions are occuring in our solution.
+
+  ![plot](https://github.com/DanielPyrek/4530/blob/master//Time0GranPlot.png?raw=true)
+
+  The linear regression formed had a slope of 0.001232 and a y-intercept of -0.002351 mL. The Ve measured was 1.9083 mL. This is incredibly similar to ProCoda’s calculated Ve, which was 1.908638 mL.
+ Linear regression line: f(x)=0.001232x-0.002351
+
+ The measured ANC followed a similar trend to the conservative ANC model. The initial ANC for the measured data was slightly higher, but at time increases it becomes lower than the conservative data. Nonetheless, the curves are a close match in terms of shape and descent.
+
+
+  <b>Conclusions</b>
+
+  The aim of this lab experiment was to determine the acid neutralizing capacity of the lake samples from the previous lab experiment. Through incremental titrant addition of hydrochloric acid, and the use of the Gran plot in ProCoda, the specific volume of titrant necessary was found to find the ANC.
+
+  <b>Suggestions/Comments</b>
+  While setting up the lab within ProCoda, it was unclear what volume of titrant should be added incrementally. While it was eventually determined that .25 mL should be used per titration, perhaps it would be easier to state that within the lab procedures so it is clearer.
+
+  ProCoda crashed on us several times. However, since this lab, bug fixes seem to have remedied this problem.
