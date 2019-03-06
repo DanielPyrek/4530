@@ -57,3 +57,4 @@ Jessie Powell
 The reactor baffles are perforated with 6 holes 1 mm in diameter. The flow through the orifices are in parallel. The orifices themselves are in series. Using the pc.head_orifice function we found that the head loss is equal to 0.232 meters. We used .00 meters, a ratio of .63, and a flowrate of (6.3333*10^-6)/6 = 0.000001055 m3/s. We do not have to multiply the head loss by six to get the total head loss. Six holes 1mm in diameter might not be a good design for this reactor because a head loss of .23 meters might be too large.
 
 <b>Queston 2:</b>
+  ![plot](https://github.com/DanielPyrek/4530/blob/master//Prelab5.png?raw=true)
