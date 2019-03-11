@@ -110,7 +110,6 @@ temp = 298*u.kelvin
 C_star = (epa.O2_sat(P_air,temp))*(u.L/u.mg)
 C_star
 
-P_air =
 time_data
 kvalues = ()
 for i in range (0,23):
@@ -150,7 +149,7 @@ plt.plot(timedata,DOdata,'ro')
 
 
 xx = (100,125,175,200,225,250,350,400,450,475,500,525,575,650,700,725,750,775,800,825,850,925,950)
-plt.plot(xx,kvalues,'o-')
+plt.plot(xx,kvalues,'o')
 
 
 
