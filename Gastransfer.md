@@ -1,3 +1,8 @@
+<b>Gas Transfer Post Lab #</b>
+3/11/19 Group 8
+Daniel Pyrek
+Jessie Powell
+
 ```python
 
 from aguaclara.core.units import unit_registry as u
@@ -75,7 +80,7 @@ acc_column = 1
 dirpath = "data/Aeration/"
 filepaths, airflows, DO_data, time_data = aeration_data(DO_column,dirpath)
 Accumulator = []
-
+z = 5
 # Plot the raw data
 DO_min = 2 * u.mg/u.L
 DO_max = 6 * u.mg/u.L
@@ -107,7 +112,7 @@ plt.show()
 P_air = 1*u.atmosphere
 temp = 298*u.kelvin
 
-C_star = (epa.O2_sat(P_air,temp))*(u.L/u.mg)
+C_star = (epa.O2_sat(P_air*z,temp))*(u.L/u.mg)
 C_star
 
 time_data
@@ -132,32 +137,58 @@ for i in range (0,23):
 
 kvalues = -kvalues
 
+
 test = 0
+
 
 t = np.array(range(200))*u.dimensionless
 DOdata = DO_data[test]*(u.L/u.mg)
 k = kvalues[test]*u.dimensionless
 C = -(C_star-DOdata[0])*2.71828**((-k*t).to(u.dimensionless).magnitude)+C_star
 
+
 timedata = time_data[test]
 DOdata = DO_data[test]
 #C=-k.to(u.dimensionless).magnitude*t.to(u.dimensionless).magnitude+DOdata[7]
 
+
 plt.plot(t,C,'g')
 plt.plot(timedata,DOdata,'ro')
-
-
+plt.xlabel(r'$time (s)$')
+plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
+plt.legend(['Model','Recorded'])
+plt.savefig('C:/Users/dapmo/github/4530/GasTransfer3')
+plt.show()
 
 xx = (100,125,175,200,225,250,350,400,450,475,500,525,575,650,700,725,750,775,800,825,850,925,950)
 plt.plot(xx,kvalues,'o')
+plt.xlabel(r'$Flow Rate (muM/s)$')
+plt.ylabel('k value')
+plt.savefig('C:/Users/dapmo/github/4530/GasTransfer4')
+plt.show()
 
 
+yy = []
+for i in range(0,23):
+  k = kvalues[i]
+  Q = xx[i]
+  V = 3
+  R = 8.314
+  T = 273+22
+  MW = 32
+  OTE = (k*6*V*R*T)/(.21*MW*P_air*Q)
+  yy = np.append(yy,OTE)
 
+
+plt.plot(xx,yy,'ro')
+plt.xlabel('Flow Rate (muM/s)')
+plt.ylabel('OTE')
+plt.savefig('C:/Users/dapmo/github/4530/GasTransfer5')
 #delete data that is less than 2 or greater than 6 mg/L
-
+plt.show()
 
 ```
-C^{\star} =P_{O_{2}} {\mathop{e}\nolimits^{\left(\frac{1727}{T} -2.105\right)}}
+
 
 
 $$ C = - (C^{*} - C_o)*e^{-kt} +  C^{*}  $$
