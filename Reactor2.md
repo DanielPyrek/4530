@@ -50,14 +50,19 @@ print('The model estimate of the number of reactors in series was', CMFR_CMFR.N)
 print('The tracer residence time was',ut.round_sf(CMFR_CMFR.theta ,2))
 print('The ratio of tracer to hydraulic residence time was',(CMFR_CMFR.theta/CMFR_theta_hydraulic).magnitude)
 
-
-
+M = (10*u.g/u.L).to(u.mg/u.ml)*6.75*u.ml
 #Save CT(in)
-CTinCMFR = max(CMFR_concentration_data)
+E1 = CMFR_concentration_data*CMFR_V/(M)
+
+from scipy import integrate
+
+tstarvalues=CMFR_time_data/(ut.round_sf(CMFR_CMFR.theta ,2))
+
+F1 = integrate.cumtrapz(E1,tstarvalues)
 
 #Calculate Tstar
 place = 0
-for i in [i for i,x in enumerate(CMFR_concentration_data) if x == CTinCMFR]:
+for i in [i for i,x in enumerate(F1) if x == CTinCMFR]:
   place = i
   if place != 0:
    break
@@ -317,11 +322,17 @@ print('The value for Tstar is',(tstar3))
 2.
 3.
 4.
-$$F(t^\star) = C(T^\star)/C(T_{in}) = 0.1$$
 
-Therefore:
 
- $$C(T^\star) = C(T_{in})*0.1$$
+We can use this equation to get E(t) from C(t):
+$$E_{\left(t^{\star} \right)} =\frac{{\rm C(x,t)}\rlap{-} V }{{\rm M}}$$
+
+
+From there we can integrate to find
+$$F_{\left(t^{\star} \right)} =\int _{0}^{t^{\star} }E_{\left(t^{\star} \right)} dt^{\star}$$
+
+V = Volume of reactor
+M = mass of pulse
 
 We used a max function in Python to find C(Tin) and calculated C(Tstar). From there we used a for loop to find the time associated with it. We then divided by residence time to get Tstar. Here are the values for our tests:
 
