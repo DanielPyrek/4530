@@ -15,6 +15,9 @@ The hypothesis expected that charcoal would be less effective than activated car
 
 An apparatus was constructed similar to the one used in the adsorption lab. See the diagram below. The directional valves allow the experimenters to flush out air from the column, and then reverse the flow direction. The dye was pumped using two flow rates for each material. The concentration of dye in each trial was measured with a photometer.
 
+![plot](https://github.com/DanielPyrek/4530/blob/master/apparatus.PNG?raw=true)
+
+
 In order to create salt treated charcoal:
 Obtain charcoal
 Grind it up to 1 - 5 mm grain
@@ -50,7 +53,8 @@ Another minor hurdle expected was the time demand of activated carbon. A column 
 
 
 **Refs to primary, review, and other literature and possibly to previous years’ projects**
-The apparatus and setup were initially based on the Adsorption lab completed earlier in the term. The lab description and manual can be found with the following link.  https://monroews.github.io/EnvEngLabTextbook/Adsorption/Adsorption.html
+The apparatus and setup were initially based on the Adsorption lab completed earlier in the term. The lab description and manual can be found with the following link.  
+https://monroews.github.io/EnvEngLabTextbook/Adsorption/Adsorption.html
 https://ojs.library.queensu.ca/index.php/ijsle/article/download/4244/4344/0
 
 
