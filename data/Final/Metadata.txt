@@ -1,5 +1,5 @@
 file name	carbon (g)	flow (mL/s)
-Carbon30g10rpm.xls	30	0.5
-Charcoal30g10rpmACTUAL.xls	30	0.5
-SaltCharcoal30g10rpm.xls	30	0.5
-Sand115g10rpmACTUALSERIOUSLY.xls	0	0.5
+Carbon30g10rpm.txt	30	0.5
+Charcoal30g10rpmACTUAL.txt	30	0.5
+SaltCharcoal30g10rpm.txt	30	0.5
+Sand115g10rpmACTUALSERIOUSLY.txt	0	0.5
