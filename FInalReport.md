@@ -43,21 +43,25 @@ def adsorption_data(C_column, dirpath):
     filepaths = [dirpath + '/' + i for i in filenames]
     #C_data is a list of numpy arrays. Thus each of the numpy data arrays can have different lengths to accommodate short and long experiments
     # cycle through all of the files and extract the column of data with oxygen concentrations and the times
-    C_data=[epa.column_of_data(i,epa.notes(i).last_valid_index() + 1,C_column,-1,'mg/L') for i in filepaths]
-    time_data=[(epa.column_of_time(i,epa.notes(i).last_valid_index() + 1,-1)).to(u.s) for i in filepaths]
+    C_data=[epa.column_of_data(i, 2,-1) for i in filepaths]
+    time_data=[(epa.column_of_time(i,2,-1)).to(u.s) for i in filepaths]
 
     adsorption_collection = collections.namedtuple('adsorption_results','metadata filenames C_data time_data')
     adsorption_results = adsorption_collection(metadata, filenames, C_data, time_data)
     return adsorption_results
 
+for y in range (0 to 3):
+  for z in range (0 to size(C_data[y]))
+  C_data[y][z] =   C_data[y][z]*u.mg/u.liter
+
 
 C_column = 1
-dirpath = "https://raw.githubusercontent.com/monroews/CEE4530/master/Examples/data/Adsorption"
-
+dirpath = "https://raw.githubusercontent.com/DanielPyrek/4530/master/data/Final/"
 
 
 metadata, filenames, C_data, time_data = adsorption_data(C_column,dirpath)
 metadata
+
 Column_D = 1 * u.inch
 Column_A = pc.area_circle(Column_D)
 Column_L = 15.2 * u.cm
@@ -95,7 +99,7 @@ for i in range(np.size(filenames)):
     plt.plot(time_data[i]/HRT[i] - Tubing_HRT[i]/HRT[i], C_data[i]/C_0,'-');
     mylegend.append(str(metadata['flow (mL/s)'][i]) + ' mL/s')
     for k in range(np.size(C_data[i])):
-        if C_data[i][k]/C_0 >= 0.5:
+        if float(C_data[i][k]/C_0) >= 0.5:
             T = (time_data[i][k]-time_data[i][k-1])/(C_data[i][k]/C_0-C_data[i][k-1]/C_0)*(0.5-C_data[i][k-1]/C_0)+time_data[i][k-1]
             svals50y = np.append(svals50y,T)
             svals50x = np.append(svals50x,metadata['carbon (g)'][i])
@@ -108,7 +112,7 @@ plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=3,left=0);
 plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
 plt.legend(mylegend);
-plt.savefig('C:/Users/dapmo/github/4530/Sand_column')
+plt.savefig('C:/Users/dapmo/github/4530/Final/Test')
 plt.show()
 
 # R_adsorption
@@ -141,7 +145,7 @@ plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=30,left=0);
 plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
 plt.legend(mylegend);
-plt.savefig('C:/Users/dapmo/github/4530/Adsorption')
+plt.savefig('C:/Users/dapmo/github/4530/Final/Test2')
 
 plt.show()
 
@@ -169,7 +173,7 @@ plt.ylabel(r'qo');
 plt.legend(mylegend);
 
 plt.plot(vals50x,qo, 'bo')
-plt.savefig('C:/Users/dapmo/github/4530/AdsorptionQ')
+plt.savefig('C:/Users/dapmo/github/4530/Final/Test3')
 plt.show()
 
 
@@ -179,6 +183,6 @@ plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=100,left=0);
 plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
 plt.legend(mylegend);
-plt.savefig('C:/Users/dapmo/github/4530/Activated_carbon')
+plt.savefig('C:/Users/dapmo/github/4530/Final/Test4')
 plt.show()
 ```
