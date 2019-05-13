@@ -32,8 +32,7 @@ Figure 3 depicts the breakthrough graphs for charcoal, salt treated charcoal, an
 ![plot](https://github.com/DanielPyrek/4530/blob/master/data/Final/FINAL3.png?raw=true)
 *Figure 3: Breakthrough Graphs for Charcoal, Salt Treated Charcoal, and Sand*
 
-Visually, it can be seen that activated carbon is the best method by far. In order to confirm this, the breakthrough values were calculated for each method. Red dye 'breaks through' through once the majority of the adsorbent reaches equilibrium with the influent concentration of red dye. An algorithm searched each data set for the first value above 1 mg/L. This allowed for some background movement. These breakthrough values are displayed in figure 4.
-
+Visually, it can be seen that activated carbon is the best method by far. In order to confirm this, the breakthrough values were calculated for each method. Red dye 'breaks through' once the majority of the adsorbent reaches equilibrium with the influent concentration of red dye. An algorithm searched each data set for the first value above 1 mg/L. This allowed for some background movement. These breakthrough values are displayed in figure 4.
 
 
 ![plot](https://github.com/DanielPyrek/4530/blob/master/data/Final/Table1.PNG?raw=true)
@@ -51,7 +50,7 @@ Ten revolutions per minute was converted into liters per second. This was multip
 Charcoal and sand treated the least water at around 0.05 liters. Charcoal treated with salt treated slightly more at 0.17 liters. Industrial grade activated treated the most at 2.64 liters.
 
 #Conclusions
-Salt treated charcoal showed some improvement over regular charcoal and sand. However, in order to remove salt from the activated charcoal after salt treatment, the charcoal was rinsed with .4 liters of water in the column. Therefore, this treatment method resulted in a net negative amount of water treated. Salt treated charcoal is not an effective method to remove red dye #40. Industrial grade activated carbon is by far the most reliable treatment method of the group. Thirty grams of activated carbon treated 2.64 liters of water. Charcoal and sand were only able to treat 0.05 liters of water. This project is important because it debunks articles online claiming that salt treated charcoal is effective.
+Salt treated charcoal showed some improvement over regular charcoal and sand. However, in order to remove salt from the activated charcoal after salt treatment, the charcoal was rinsed with 0.4 liters of water in the column. Therefore, this treatment method resulted in a net negative amount of water treated. Salt treated charcoal is not an effective method to remove red dye #40. Industrial grade activated carbon is by far the most reliable treatment method of the group. Thirty grams of activated carbon treated 2.64 liters of water. Charcoal and sand were only able to treat 0.05 liters of water. This project is important because it debunks articles online claiming that salt treated charcoal is effective.
 
 
 
