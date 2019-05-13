@@ -1,29 +1,67 @@
-**Final Report for Salt Treated Charcoal**
-**Group 8**
+#Final Report for Salt Treated Charcoal
+Daniel Pyrek (6 hrs) and Jessie Powell (4 hrs)
+Group 8
 5/13/19
-Daniel Pyrek and Jessie Powell
+
 
 
 #Introduction and Objectives
-The purpose of this experiment was to activate charcoal with sodium chloride so that it might be used as a viable treatment for water and contaminant adsorption. A paper was found containing findings that coconut shells, made into charcoal and soaked in NaCl, appeared to have a positive effect on absorbency. However, the results were confusing because there was no comparison to either a substance with little adsorbance abilities, such a sand, or one with high adsorbancy, such as activated carbon. Should salt treated charcoal actually have water filtering potential, this experiment would have significant social relevance. Developing countries with no access to a centralized water treatment plant would be able to filter their water with little resources and simple steps. Agricultural byproducts, such as old husks, shells, and other debris, could gain use by becoming the source of charcoal. 
+The purpose of this experiment was to activate charcoal with sodium chloride so that it might be used as a viable treatment for water and contaminant adsorption. A paper was found containing findings that coconut shells, made into charcoal and soaked in NaCl, appeared to have a positive effect on absorbency. However, the results were confusing because there was no comparison to either a substance with little adsorbance abilities, such a sand, or one with high adsorbancy, such as activated carbon. Should salt treated charcoal actually have water filtering potential, this experiment would have significant social relevance. Developing countries with no access to a centralized water treatment plant would be able to filter their water with little resources and simple steps. Agricultural byproducts, such as old husks, shells, and other debris, could gain use by becoming the source of charcoal.
 
 
-Procedure
+#Procedure
 Four parameters were tested: sand, activated carbon, salt treated charcoal, and untreated charcoal. 30 grams of each substance were measured out and added to the column. For both charcoal tests, a coffee filter was added to each end of the column due to its fine, powdery nature. First, to remove air bubbles from the column, water was pumped at a flow rate of 10 rpm from the bottom of the tube up, flushing out any air. Once done, red dye #40, at a concentration of 0.05 g/L, was pumped down the column. The column was observed until the breakthrough time was achieved.
 
 To begin with the treatment of the charcoal, grilling briquettes and table salt (99% NaCl) were purchased. The briquettes were ground into a semi fine powder and soaked in the salt solution. This solution was a 25% mass per volume solution. 50 mg was added to a beaker and filled with water until reaching 200 mL. The charcoal was soaked for 24 hours, then allowed to dry. However, there was a significant amount of salt still in the charcoal. In order to remove it, the sample was put into the column and had water pumped into it, dissolving most of the salt. The remaining charcoal was then redried.
 
 
-Results and Discussion [Daniel]
+#Results and Discussion
 
-Conclusions [Daniel]
+Using ProCoDA and a photometer, concentration was recorded as red dye #40 was added to the column. Figure 1 is a graph of all the data superimposed on one graph. The activated charcoal graph's scale is so large that it makes the other graphs hard to read.
 
-Suggestions/Comments
+![plot](https://github.com/DanielPyrek/4530/blob/master/data/Final/FINALAll.png?raw=true)
+*Figure 1: Breakthrough Graphs for Each Method*
+
+Figure 2 shows data purely for charcoal. Data was taken until half of the influent concentration. This concentration is marked with a red line.
+
+![plot](https://github.com/DanielPyrek/4530/blob/master/data/Final/FINAL1.png?raw=true)
+*Figure 2: Breakthrough Curve for Activated Carbon*
+
+Figure 3 depicts the breakthrough graphs for charcoal, salt treated charcoal, and sand. Half of the influent concentration is graphed for comparison as well.
+
+![plot](https://github.com/DanielPyrek/4530/blob/master/data/Final/FINAL3.png?raw=true)
+*Figure 3: Breakthrough Graphs for Charcoal, Salt Treated Charcoal, and Sand*
+
+Visually, it can be seen that activated carbon is the best method by far. In order to confirm this, the breakthrough values were calculated for each method. Red dye 'breaks through' through once the majority of the adsorbent reaches equilibrium with the influent concentration of red dye. An algorithm searched each data set for the first value above 1 mg/L. This allowed for some background movement. These breakthrough values are displayed in figure 4.
+
+
+
+![plot](https://github.com/DanielPyrek/4530/blob/master/data/Final/Table1.PNG?raw=true)
+*Figure 4: Breakthrough Values*
+
+Ten revolutions per minute was converted into liters per second. This was multiplied by the breakthrough times. This gave the number of liters treated by each method until the red dye made it through the filter. This data is displayed in figures 5 and 6:
+
+![plot](https://github.com/DanielPyrek/4530/blob/master/data/Final/Table2.PNG?raw=true)
+*Figure 5: Water Treated by Each Method*
+
+
+![plot](https://github.com/DanielPyrek/4530/blob/master/data/Final/FINALBAR.png?raw=true)
+*Figure 6: Bar Graph of Water Treated by Each Method*
+
+Charcoal and sand treated the least water at around 0.05 liters. Charcoal treated with salt treated slightly more at 0.17 liters. Industrial grade activated treated the most at 2.64 liters.
+
+#Conclusions
+Salt treated charcoal showed some improvement over regular charcoal and sand. However, in order to remove salt from the activated charcoal after salt treatment, the charcoal was rinsed with .4 liters of water in the column. Therefore, this treatment method resulted in a net negative amount of water treated. Salt treated charcoal is not an effective method to remove red dye #40. Industrial grade activated carbon is by far the most reliable treatment method of the group. Thirty grams of activated carbon treated 2.64 liters of water. Charcoal and sand were only able to treat 0.05 liters of water. This project is important because it debunks articles online claiming that salt treated charcoal is effective.
+
+
+
+#Suggestions/Comments
 Should this experiment be replicated in the future, there are several suggestions and comments that would make these attempts easier and potentially yield more sound results. In terms of advice to make the current procedure easier, a coffee filter should be added to each side of the column in order to prevent any charcoal removal. A mass per volume solution for salt is recommended out of convenience of measuring out water and salt ratios. There are also several alterations to what is being tested or how the materials are prepared that could produce interesting results. Because activated carbon is activated by cooking at extreme heats, one idea would be to bake or cook the charcoal to see if that increases its absorption abilities. Additionally, it is recommended that tests be repeated for better accuracy in results.
 
 
 
 
+#Appendix:
 
 ````python
 
@@ -37,7 +75,6 @@ import collections
 import os
 from pathlib import Path
 import pandas as pd
-
 
 
 
@@ -150,7 +187,7 @@ plt.plot(time_data[i], C_data[i],'-', label = "Salted Treated Charcoal");
 i =3
 plt.plot(time_data[i], C_data[i],'-', label = "Sand");
 
-plt.axhline(y=25, color='r', linestyle='-')
+plt.axhline(y=25, color='r', linestyle='-', label = "Half of Influent Red Dye Concentration")
 
 plt.title('Charcoal, Salt Treated Charcoal, and Sand')
 plt.xlabel('Time (s)');
@@ -186,9 +223,9 @@ plt.bar(y_pos, water, align='center', alpha=0.5)
 plt.xticks(y_pos, objects)
 plt.ylabel('Water Treated (L)')
 plt.title('Water Treated by Each Method')
-
+plt.savefig('C:/Users/dapmo/github/4530/data/Final/FINALBAR')
 plt.show()
-plt.savefig('C:/Users/dapmo/github/4530/data/Final/FINAL4')
+
 
 
 
