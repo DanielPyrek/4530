@@ -1,3 +1,30 @@
+**Final Report for Salt Treated Charcoal**
+**Group 8**
+5/13/19
+Daniel Pyrek and Jessie Powell
+
+
+#Introduction and Objectives
+The purpose of this experiment was to activate charcoal with sodium chloride so that it might be used as a viable treatment for water and contaminant adsorption. A paper was found containing findings that coconut shells, made into charcoal and soaked in NaCl, appeared to have a positive effect on absorbency. However, the results were confusing because there was no comparison to either a substance with little adsorbance abilities, such a sand, or one with high adsorbancy, such as activated carbon. Should salt treated charcoal actually have water filtering potential, this experiment would have significant social relevance. Developing countries with no access to a centralized water treatment plant would be able to filter their water with little resources and simple steps. Agricultural byproducts, such as old husks, shells, and other debris, could gain use by becoming the source of charcoal. 
+
+
+Procedure
+Four parameters were tested: sand, activated carbon, salt treated charcoal, and untreated charcoal. 30 grams of each substance were measured out and added to the column. For both charcoal tests, a coffee filter was added to each end of the column due to its fine, powdery nature. First, to remove air bubbles from the column, water was pumped at a flow rate of 10 rpm from the bottom of the tube up, flushing out any air. Once done, red dye #40, at a concentration of 0.05 g/L, was pumped down the column. The column was observed until the breakthrough time was achieved.
+
+To begin with the treatment of the charcoal, grilling briquettes and table salt (99% NaCl) were purchased. The briquettes were ground into a semi fine powder and soaked in the salt solution. This solution was a 25% mass per volume solution. 50 mg was added to a beaker and filled with water until reaching 200 mL. The charcoal was soaked for 24 hours, then allowed to dry. However, there was a significant amount of salt still in the charcoal. In order to remove it, the sample was put into the column and had water pumped into it, dissolving most of the salt. The remaining charcoal was then redried.
+
+
+Results and Discussion [Daniel]
+
+Conclusions [Daniel]
+
+Suggestions/Comments
+Should this experiment be replicated in the future, there are several suggestions and comments that would make these attempts easier and potentially yield more sound results. In terms of advice to make the current procedure easier, a coffee filter should be added to each side of the column in order to prevent any charcoal removal. A mass per volume solution for salt is recommended out of convenience of measuring out water and salt ratios. There are also several alterations to what is being tested or how the materials are prepared that could produce interesting results. Because activated carbon is activated by cooking at extreme heats, one idea would be to bake or cook the charcoal to see if that increases its absorption abilities. Additionally, it is recommended that tests be repeated for better accuracy in results.
+
+
+
+
+
 ````python
 
 from aguaclara.core.units import unit_registry as u
@@ -158,7 +185,7 @@ y_pos = np.arange(len(watertreated))
 plt.bar(y_pos, water, align='center', alpha=0.5)
 plt.xticks(y_pos, objects)
 plt.ylabel('Water Treated (L)')
-plt.title('Water Treated by Method')
+plt.title('Water Treated by Each Method')
 
 plt.show()
 plt.savefig('C:/Users/dapmo/github/4530/data/Final/FINAL4')
