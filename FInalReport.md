@@ -13,6 +13,9 @@ import pandas as pd
 
 
 
+
+
+
 def adsorption_data(C_column, dirpath):
     """This function extracts the data from folder containing tab delimited
     files of adsorption data. The file must be the original tab delimited file.
@@ -50,9 +53,6 @@ def adsorption_data(C_column, dirpath):
     adsorption_results = adsorption_collection(metadata, filenames, C_data, time_data)
     return adsorption_results
 
-for y in range (0 to 3):
-  for z in range (0 to size(C_data[y]))
-  C_data[y][z] =   C_data[y][z]*u.mg/u.liter
 
 
 C_column = 1
@@ -62,127 +62,108 @@ dirpath = "https://raw.githubusercontent.com/DanielPyrek/4530/master/data/Final/
 metadata, filenames, C_data, time_data = adsorption_data(C_column,dirpath)
 metadata
 
-Column_D = 1 * u.inch
-Column_A = pc.area_circle(Column_D)
-Column_L = 15.2 * u.cm
-Column_V = Column_A * Column_L
-#I'm guessing at the volume of water in the tubing, in the photometer, and in the space above and below the column. This parameter could be adjusted!
-Tubing_V = 60 * u.mL
-Flow_rate = ([metadata['flow (mL/s)'][i] for i in metadata.index])* u.mL/u.s
-Mass_carbon= ([metadata['carbon (g)'][i] for i in metadata.index])* u.g
-Tubing_HRT = Tubing_V/Flow_rate
-#to make things simple we are assuming that the porosity is the same for sand and for activated carbon. That is likely not true!
-porosity = 0.4
-C_0 = 50 * u.mg/u.L
-
-#estimate the HRT for all of the columns
-HRT = (porosity * Column_V/Flow_rate).to(u.s)
 
 #zero the concentration data by subtracting the value of the first data point from all data points. Do this in each data set.
 
-L_column = 15.2 * u.cm
-D_column = 1*u.inch
-A_column = pc.area_circle(D_column)
-V_column = (A_column * L_column).to(u.mL)
+for k in range(np.size(filenames)):
+  test = 1000
+  for z in range(np.size(time_data[k])):
+    if (C_data[k][z] < test and C_data[k][z] > 0):
+      test = C_data[k][z]
+  for y in range(np.size(time_data[k])):
+    C_data[k][y] = C_data[k][y] - test
 
 
-for i in range(np.size(filenames)):
-  C_data[i]=C_data[i]-C_data[i][0]
 
-svals50y = ()
-svals50x = ()
-sTwater = ()
-#Create a graph of the columns that didn't have any activated carbon
-mylegend = []
-for i in range(np.size(filenames)):
-  if (metadata['carbon (g)'][i] == 0):
-    plt.plot(time_data[i]/HRT[i] - Tubing_HRT[i]/HRT[i], C_data[i]/C_0,'-');
-    mylegend.append(str(metadata['flow (mL/s)'][i]) + ' mL/s')
-    for k in range(np.size(C_data[i])):
-        if float(C_data[i][k]/C_0) >= 0.5:
-            T = (time_data[i][k]-time_data[i][k-1])/(C_data[i][k]/C_0-C_data[i][k-1]/C_0)*(0.5-C_data[i][k-1]/C_0)+time_data[i][k-1]
-            svals50y = np.append(svals50y,T)
-            svals50x = np.append(svals50x,metadata['carbon (g)'][i])
-            timewater = V_column/(metadata['flow (mL/s)'][i])
-            sTwater= np.append(sTwater,timewater)
-            break
+#PLOT ALL ON SAME PLOT
 
 
-plt.xlabel(r'$\frac{t}{\theta}$');
-plt.xlim(right=3,left=0);
+i =0
+plt.plot(time_data[i], C_data[i],'-',label = "Activated Carbon");
+i =1
+plt.plot(time_data[i], C_data[i],'-',label = "Charcoal");
+i =2
+plt.plot(time_data[i], C_data[i],'-', label = "Salted Treated Charcoal");
+i =3
+plt.plot(time_data[i], C_data[i],'-', label = "Sand");
+plt.xlim([0,40000])
+plt.ylim([0,27])
+
+
+plt.xlabel(r'Time (s)');
 plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
-plt.legend(mylegend);
-plt.savefig('C:/Users/dapmo/github/4530/Final/Test')
+plt.legend()
+plt.title('All Tests')
+plt.savefig('C:/Users/dapmo/github/4530/data/Final/FINALAll')
 plt.show()
 
-# R_adsorption
-sR_adsorption = svals50y/sTwater
-sR_adsorption
+#PLOT CARBON
 
+i =0
+plt.plot(time_data[i], C_data[i],'-',label = "Activated Carbon");
+plt.xlim([0,43000])
+plt.ylim([0,27])
 
+plt.axhline(y=25, color='r', linestyle='-', label = "Half of Influent Red Dye Concentration")
 
-
-
-vals50y =()
-vals50x =()
-Twater = ()
-# create a graph of the columns that had different masses of activated carbon. Note that this includes systems with different flow rates!
-mylegend =[]
-for i in range(np.size(filenames)):
-  if (metadata['carbon (g)'][i] != 0):
-    plt.plot(time_data[i]/HRT[i] - Tubing_HRT[i]/HRT[i], C_data[i]/C_0,'-');
-    mylegend.append(str(ut.round_sf(metadata['carbon (g)'][i],3)) + ' g, ' + str(ut.round_sf(metadata['flow (mL/s)'][i],2)) + ' mL/s')
-    for k in range(np.size(C_data[i])):
-        if C_data[i][k]/C_0 >= 0.5:
-          T = (time_data[i][k]-time_data[i][k-1])/(C_data[i][k]/C_0-C_data[i][k-1]/C_0)*(0.5-C_data[i][k-1]/C_0)+time_data[i][k-1]
-          vals50y = np.append(vals50y,T)
-          vals50x = np.append(vals50x,metadata['carbon (g)'][i])
-          timewater = V_column/(metadata['flow (mL/s)'][i])
-          Twater= np.append(Twater,timewater)
-          break
-
-plt.xlabel(r'$\frac{t}{\theta}$');
-plt.xlim(right=30,left=0);
+plt.xlabel(r'Time (s)');
 plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
-plt.legend(mylegend);
-plt.savefig('C:/Users/dapmo/github/4530/Final/Test2')
-
+plt.legend()
+plt.title('Activated Carbon')
+plt.savefig('C:/Users/dapmo/github/4530/data/Final/FINAL1')
 plt.show()
 
 
-plt.xlabel(r'Mass of Activated Carbon (g)');
-plt.ylabel(r'time when the effluent concentration was 50% (s)');
-plt.legend(mylegend);
+#PLOT ALL OTHERS
 
-plt.plot(vals50x,vals50y, 'ro')
-plt.savefig('C:/Users/dapmo/github/4530/Adsorptiontimeto50')
-plt.show()
+i =1
+plt.plot(time_data[i], C_data[i],'-',label = "Charcoal");
+i =2
+plt.plot(time_data[i], C_data[i],'-', label = "Salted Treated Charcoal");
+i =3
+plt.plot(time_data[i], C_data[i],'-', label = "Sand");
 
-# Carbon R_adsorption
-R_adsorption = vals50y/Twater
-R_adsorption
+plt.axhline(y=25, color='r', linestyle='-')
 
-vals50y/vals50x
-
-
-qo = (R_adsorption-1)*(C_0*porosity*V_column/vals50x)/1000000
-qo
-
-plt.xlabel(r'Mass of Activated Carbon (g)');
-plt.ylabel(r'qo');
-plt.legend(mylegend);
-
-plt.plot(vals50x,qo, 'bo')
-plt.savefig('C:/Users/dapmo/github/4530/Final/Test3')
-plt.show()
-
-
-
-
-plt.xlabel(r'$\frac{t}{\theta}$');
-plt.xlim(right=100,left=0);
+plt.title('Charcoal, Salt Treated Charcoal, and Sand')
+plt.xlabel('Time (s)');
+plt.xlim(0,800);
 plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
-plt.legend(mylegend);
-plt.savefig('C:/Users/dapmo/github/4530/Final/Test4')
+plt.legend();
+plt.savefig('C:/Users/dapmo/github/4530/data/Final/FINAL3')
 plt.show()
+
+
+#FIND BREAKTHROUGH POINTS
+breakthrough = ();
+for k in range(np.size(filenames)):
+  for z in range(np.size(time_data[k])):
+    if (C_data[k][z] > 1 and time_data[k][z] > 50*u.second):
+      breakthrough = np.append(breakthrough,time_data[k][z]);
+      break
+
+print(breakthrough)
+breakthrough = np.asarray(breakthrough)
+
+#Amount of water treated before breakthroughs
+mLperRev = (2.8*(u.mL)/(u.revolution)).to((u.liter)/(u.revolution))
+Q = (10*u.revolution/u.minute).to(u.revolution/u.second)
+watertreated = [Q*mLperRev*breakthrough[0]*u.second,Q*mLperRev*breakthrough[1]*u.second,Q*mLperRev*breakthrough[2]*u.second,Q*mLperRev*breakthrough[3]*u.second]
+print(watertreated)
+
+water = [2.64,0.052,0.165,0.056]
+objects = ('Carbon', 'Charcoal', 'Charcoal w/ Salt', 'Sand')
+y_pos = np.arange(len(watertreated))
+
+plt.bar(y_pos, water, align='center', alpha=0.5)
+plt.xticks(y_pos, objects)
+plt.ylabel('Water Treated (L)')
+plt.title('Water Treated by Method')
+
+plt.show()
+plt.savefig('C:/Users/dapmo/github/4530/data/Final/FINAL4')
+
+
+
+
 ```
